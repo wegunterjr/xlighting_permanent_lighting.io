@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220" class="w-full h-full">
+  <path d="M40,60 L70,30 L330,30 L360,60 L360,160 L330,190 L70,190 L40,160 Z" fill="black" stroke="#ff0000" stroke-width="4"></path>
+  <path d="M165,50 L190,50 L205,80 L235,50 L260,50 L215,95 L240,145 L215,145 L195,110 L165,145 L140,145 L185,95 Z" fill="#ff0000"></path>
+  <path d="M192,85 L212,85 L200,105 L215,105 L188,130 L195,105 L180,105 Z" fill="black" stroke="black" stroke-width="2"></path>
+  <text x="200" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="32" letter-spacing="2" fill="#ff0000">LIGHTING</text>
+</svg>
