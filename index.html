@@ -274,7 +274,7 @@
         <a href="#faq">FAQ</a>
       </nav>
       <div style="display:flex;align-items:center;gap:.5rem">
-        <button class="btn btn-primary btn-sm nav-cta" data-buy>Buy — $199</button>
+        <a class="btn btn-primary btn-sm nav-cta" href="https://buy.stripe.com/8x29AU9YF0rxcri8dI7ss05">Buy — $199</a>
         <button class="burger" id="burger" aria-label="Open menu">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -284,7 +284,7 @@
       <a href="#controller">Controller</a>
       <a href="#compare">Why switch</a>
       <a href="#faq">FAQ</a>
-      <button class="btn btn-primary btn-full" style="margin-top:12px" data-buy>Buy — $199</button>
+      <a class="btn btn-primary btn-full" style="margin-top:12px" href="https://buy.stripe.com/8x29AU9YF0rxcri8dI7ss05">Buy — $199</a>
     </div>
   </header>
 
@@ -297,7 +297,7 @@
         <h1>Permanent lighting, under your control.</h1>
         <p class="lead">Native 36-volt WLED controller for Govee Pro and high-power strings. Four channels. A relay that cuts power when the lights are off. $199 + shipping — first production run.</p>
         <div class="hero-actions">
-          <button class="btn btn-primary" data-buy>Buy yours — $199</button>
+          <a class="btn btn-primary" href="https://buy.stripe.com/8x29AU9YF0rxcri8dI7ss05">Buy yours — $199</a>
           <a class="btn btn-outline" href="#controller">See the board</a>
         </div>
         <p class="fine">Pre-flashed WLED · 1-year warranty · Ships from Utah</p>
@@ -335,7 +335,7 @@
           <p class="price">$199</p>
           <p class="ship">+ shipping at checkout · first production run · ships from Utah</p>
           <div class="actions">
-            <button class="btn btn-primary" data-buy>Buy yours</button>
+            <a class="btn btn-primary" href="https://buy.stripe.com/8x29AU9YF0rxcri8dI7ss05">Buy yours — $199</a>
             <a class="btn btn-outline" href="https://n8n.gunterbots.com/webhook/lumi-app" target="_blank" rel="noreferrer">Project calculator</a>
           </div>
         </div>
@@ -393,7 +393,7 @@
           <p class="eyebrow">Designed in Utah</p>
           <h2 class="h2" style="margin-top:.75rem">Small-batch boards. A name on the other end of the email.</h2>
           <p class="muted" style="margin-top:1.25rem">Designed and assembled here, pre-flashed with WLED, warranted for a year. Not a marketplace listing from another hemisphere — a Utah founder building the 36V controller he couldn't buy.</p>
-          <button class="btn btn-primary" style="margin-top:2rem" data-buy>Buy a unit</button>
+          <a class="btn btn-primary" style="margin-top:2rem" href="https://buy.stripe.com/8x29AU9YF0rxcri8dI7ss05">Buy a unit — $199</a>
         </div>
       </div>
     </section>
@@ -441,7 +441,7 @@
         <h2 class="h2" style="margin-top:1rem">The house is already the show. Give it a better conductor.</h2>
         <p>$199 + shipping. Native 36V. Four channels. A relay that cuts power. Open-source WLED. Hand-assembled in Utah, one board at a time.</p>
         <div class="actions" style="margin-top:2rem">
-          <button class="btn btn-primary" data-buy>Buy the controller</button>
+          <a class="btn btn-primary" href="https://buy.stripe.com/8x29AU9YF0rxcri8dI7ss05">Buy the controller — $199</a>
           <a class="btn btn-outline" href="mailto:info@utahlightcontrollers.com?subject=Spark%20V1%20question">Ask a question</a>
         </div>
       </div>
@@ -488,7 +488,7 @@
   </footer>
 
   <div class="sticky">
-    <button class="btn btn-primary btn-full" data-buy>Buy — $199</button>
+    <a class="btn btn-primary btn-full" href="https://buy.stripe.com/8x29AU9YF0rxcri8dI7ss05">Buy — $199</a>
   </div>
 
   <dialog id="reserve">
@@ -499,7 +499,7 @@
       <p class="eyebrow">Spark V1 · $199 + shipping</p>
       <h2 style="margin-top:.5rem">Buy the controller</h2>
       <p class="muted" style="margin-top:.75rem;font-size:.875rem">Pay with Stripe, or email an order if you want to talk first. Ships from Utah.</p>
-      <a class="btn btn-primary btn-full" id="stripe-btn" style="margin-top:1.5rem" target="_blank" rel="noreferrer">Pay $199 + shipping</a>
+      <a class="btn btn-primary btn-full" id="stripe-btn" style="margin-top:1.5rem" href="https://buy.stripe.com/8x29AU9YF0rxcri8dI7ss05">Pay $199 + shipping</a>
       <a class="btn btn-outline btn-full" id="mail-btn" style="margin-top:.75rem">Email to order</a>
       <p class="note">Opens your mail app to info@utahlightcontrollers.com</p>
     </div>
@@ -558,21 +558,7 @@
       table.insertAdjacentHTML("beforeend", `<div class="row"><span>${r[0]}</span><span style="color:var(--muted)">${r[1]}</span><span>${r[2]}</span></div>`);
     });
 
-    const stripeBtn = document.getElementById("stripe-btn");
-    const mailBtn = document.getElementById("mail-btn");
-    mailBtn.href = MAIL_BUY;
-    if (STRIPE) {
-      stripeBtn.href = STRIPE;
-      stripeBtn.hidden = false;
-    } else {
-      stripeBtn.hidden = true;
-    }
-
-    function checkout() {
-      if (STRIPE) { location.href = STRIPE; return; }
-      dialog.showModal();
-    }
-    document.querySelectorAll("[data-buy]").forEach((el) => el.addEventListener("click", checkout));
+    document.getElementById("mail-btn").href = MAIL_BUY;
     document.getElementById("close").addEventListener("click", () => dialog.close());
     dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
   </script>
