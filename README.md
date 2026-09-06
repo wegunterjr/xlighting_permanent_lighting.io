@@ -1,6 +1,6 @@
 # X Lighting — Spark V1
 
-Sales site for the Utah-made 36V 3-channel WLED controller.
+Sales site for the Utah-made 36V 4-channel WLED controller.
 
 Live: https://wegunterjr.github.io/xlighting_permanent_lighting.io/
 
