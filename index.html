@@ -522,7 +522,7 @@
           <p class="muted" style="margin-top:1rem">So I designed Spark V1: a native 36-volt WLED controller with four independent channels and a relay that actually cuts power. Typical boards stop at one or two channels, skip 36V, and leave the strings sipping power all summer. Mine doesn’t. And it looks awesome. My crazy robotics dad and a cool neighbor who knows electronics helped me put it together. Two ports ready, add two more — four channels either way. We assemble each unit in the USA. I used AI to hustle this site. Every board that ships helps me stay in school and in the crease. Buy a board, fund a season.</p>
           <div class="actions" style="margin-top:2rem">
             <a class="btn btn-primary" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Buy a unit — $299</a>
-            <a class="btn btn-outline" data-support>Just send money</a>
+            <!-- <a class="btn btn-outline" data-support>Just send money</a> -->
           </div>
         </div>
       </div>
@@ -571,10 +571,12 @@
             <summary>How do I buy one?<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m6 9 6 6 6-6"/></svg></summary>
             <p>Pay $299 + shipping with Stripe. I’ve got 22 ready to ship from Utah. Questions come to me: info@utahlightcontrollers.com — a person, not a ticket abyss.</p>
           </details>
+          <!--
           <details>
-            <summary>I don’t need a controller. Can I just send money?<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m6 9 6 6 6-6"/></svg></summary>
-            <p>Yes. That’s a real option. Hit <a href="#story" data-support>Just send money</a> — no board, no shipping, throw in whatever you want. Helps with rent, food, tuition, lax fees, gas — the stuff that showed up when I got to college.</p>
+            <summary>I don’t need a controller. Can I just send money?</summary>
+            <p>Yes. That’s a real option. Hit Just send money — no board, no shipping, throw in whatever you want. Helps with rent, food, tuition, lax fees, gas — the stuff that showed up when I got to college.</p>
           </details>
+          -->
           <details>
             <summary>What's the warranty?<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m6 9 6 6 6-6"/></svg></summary>
             <p>One year on craftsmanship. Weatherproof enclosure, fused outputs, onboard relay. If something’s off, email me. I’ll act like I built it, because I did.</p>
@@ -592,7 +594,7 @@
         <p>$299 + shipping. Native 36V. Two ports ready, two more you can add, four channels either way. I designed it because college lacrosse is expensive — rent, food, tuition, lax fees, gas. Dad and the neighbor helped. 22 are ready to go. You get a cooler house. I get to keep playing.</p>
         <div class="actions" style="margin-top:2rem">
           <a class="btn btn-primary" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Grab the controller — $299</a>
-          <a class="btn btn-outline" data-support>Just send money</a>
+          <!-- <a class="btn btn-outline" data-support>Just send money</a> -->
         </div>
       </div>
     </section>
@@ -627,7 +629,7 @@
           <div>
             <p class="lab">Contact</p>
             <a href="mailto:info@utahlightcontrollers.com?subject=Spark%20V1" style="word-break:break-all">info@utahlightcontrollers.com</a>
-            <a data-support>Just send money</a>
+            <!-- <a data-support>Just send money</a> -->
             <a href="#faq">FAQ</a>
             <a href="https://kno.wled.ge/" target="_blank" rel="noreferrer">WLED docs</a>
           </div>
@@ -654,7 +656,7 @@
       <p class="muted" style="margin-top:.75rem;font-size:.875rem">I built this because college got expensive. Native 36V for Govee Pro and a few other strings, four channels, true-off relay. Assembled in the USA. Looks awesome. Works. That’s the hustle.</p>
       <a class="btn btn-primary btn-full" style="margin-top:1.5rem" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Pay $299 + shipping</a>
       <a class="btn btn-outline btn-full" id="mail-btn" style="margin-top:.75rem">Email to order</a>
-      <a class="btn btn-outline btn-full" data-support style="margin-top:.75rem">Don’t need a board? Just send money</a>
+      <!-- <a class="btn btn-outline btn-full" data-support style="margin-top:.75rem">Don’t need a board? Just send money</a> -->
       <p class="note">Opens your mail app to info@utahlightcontrollers.com</p>
     </div>
   </dialog>
@@ -668,9 +670,10 @@
     const MAIL_BUY = "mailto:" + EMAIL
       + "?subject=" + encodeURIComponent("Spark V1 order — $299")
       + "&body=" + encodeURIComponent("I want to buy a Spark V1 4-channel WLED controller for $299.\n\nName:\nShipping address:\nPhone:\n");
-    const MAIL_SUPPORT = "mailto:" + EMAIL
-      + "?subject=" + encodeURIComponent("Just send money")
-      + "&body=" + encodeURIComponent("I don't need a controller. I want to throw in some money for your Spark project — college, lacrosse, the next batch of boards.\n\nName:\nHow much I want to send:\n");
+    // Parked: Just send money
+    // const MAIL_SUPPORT = "mailto:" + EMAIL
+    //   + "?subject=" + encodeURIComponent("Just send money")
+    //   + "&body=" + encodeURIComponent("I don't need a controller. I want to throw in some money for your Spark project — college, lacrosse, the next batch of boards.\n\nName:\nHow much I want to send:\n");
 
     const nav = document.getElementById("nav");
     const burger = document.getElementById("burger");
@@ -718,7 +721,7 @@
     });
 
     document.getElementById("mail-btn").href = MAIL_BUY;
-    document.querySelectorAll("[data-support]").forEach((a) => { a.href = SUPPORT || MAIL_SUPPORT; });
+    // document.querySelectorAll("[data-support]").forEach((a) => { a.href = SUPPORT || MAIL_SUPPORT; });
     document.getElementById("close").addEventListener("click", () => dialog.close());
     dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
   </script>
