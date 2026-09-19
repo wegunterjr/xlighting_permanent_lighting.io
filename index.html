@@ -180,6 +180,47 @@
       .product { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
     }
 
+    .uses { background: var(--bg); }
+    .use-grid {
+      margin-top: 2.5rem;
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: 1fr;
+    }
+    .use-card {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      border-radius: 12px;
+      aspect-ratio: 4 / 3;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.08);
+    }
+    .use-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .use-card span {
+      position: absolute; left: 0.85rem; bottom: 0.75rem;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,.7);
+    }
+    .use-note {
+      margin: 1.5rem 0 0;
+      max-width: 42rem;
+      padding: 1rem 1.15rem;
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.08);
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .use-note strong { color: var(--fg); font-weight: 600; }
+    @media (min-width: 640px) { .use-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1024px) {
+      .use-grid { grid-template-columns: repeat(4, 1fr); }
+      .use-card.wide { grid-column: span 2; }
+    }
+
     .features { background: var(--surface); }
     .feat-grid { margin-top: 3rem; display: grid; gap: 1rem; }
     .feat {
@@ -301,6 +342,7 @@
       </a>
       <nav class="nav-links">
         <a href="#controller">Controller</a>
+        <a href="#anywhere">Anywhere</a>
         <a href="#compare">Why switch</a>
         <a href="#story">Story</a>
         <a href="#faq">FAQ</a>
@@ -314,6 +356,7 @@
     </div>
     <div class="mobile-menu" id="menu">
       <a href="#controller">Controller</a>
+      <a href="#anywhere">Anywhere</a>
       <a href="#compare">Why switch</a>
       <a href="#story">Story</a>
       <a href="#faq">FAQ</a>
@@ -388,6 +431,24 @@
             <a class="btn btn-outline" href="https://n8n.gunterbots.com/webhook/lumi-app" target="_blank" rel="noreferrer">Project calculator</a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="block uses" id="anywhere">
+      <div class="wrap">
+        <p class="eyebrow">Portable · 36 volts</p>
+        <h2 class="h2" style="margin-top:.75rem;max-width:20ch">House. Garage. Shed. Car. Office. Room. Airplane.</h2>
+        <p class="muted" style="margin-top:1rem;max-width:40rem">You name it. The controller is portable. Put the lights on whatever you’ve got — then take the setup with you. Same board. Same 36-volt strings. Not glued to one roof.</p>
+        <div class="use-grid">
+          <a class="use-card wide" href="#controller"><img src="images/hero-house.jpg" alt="House with warm permanent roofline lighting" /><span>House</span></a>
+          <a class="use-card" href="#controller"><img src="images/use-garage.jpg" alt="Garage with warm puck lights over the doors" /><span>Garage</span></a>
+          <a class="use-card" href="#controller"><img src="images/use-shed.jpg" alt="Backyard shed with roofline lighting" /><span>Shed</span></a>
+          <a class="use-card" href="#controller"><img src="images/use-car.jpg" alt="Pickup truck with portable puck lights along the cab and bed" /><span>Car</span></a>
+          <a class="use-card" href="#controller"><img src="images/use-office.jpg" alt="Office building with warm eave lighting" /><span>Office</span></a>
+          <a class="use-card" href="#controller"><img src="images/use-room.jpg" alt="Bedroom with warm cove and headboard puck lighting" /><span>Room</span></a>
+          <a class="use-card" href="#controller"><img src="images/use-airplane.jpg" alt="Hangar and airplane with warm puck lighting" /><span>Airplane</span></a>
+        </div>
+        <p class="use-note"><strong>A 12V car battery will not run these by itself.</strong> Govee Pro (and this board) want 36 volts. At the house, garage, shed, office, or room: use the 36V wall brick that came with the lights. In a car, boat, or hangar: you need a 12V-to-36V boost converter sized for the watts, or a 36V battery pack. Don’t clip 12V straight to the board. Email a photo if you’re not sure: info@utahlightcontrollers.com.</p>
       </div>
     </section>
 
@@ -481,6 +542,14 @@
             <p>Govee Pro is the headliner. It also works with a few other high-power addressable strings — WS281x, SK6812, and similar 36V-friendly setups. If you’re not sure about your lights, email me a photo of the controller and a puck: info@utahlightcontrollers.com.</p>
           </details>
           <details>
+            <summary>Can I run it off a 12V battery?<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <p>Not directly. A car battery is ~12 volts. These strings want 36. Plug the Govee 36V wall brick in at home. For a car, boat, or hangar with only 12V, you need a 12V-to-36V boost converter rated for your string’s watts (a typical Pro brick is around 108W, so that’s serious current on the 12V side) or a 36V pack. A cigarette-lighter adapter is not enough. Email me before you buy a booster if you want a sanity check.</p>
+          </details>
+          <details>
+            <summary>Are they actually portable?<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <p>The controller is. Take it from the house to the garage, the shed, the office, a room, a parked car, a hangar — you name it. The lights go where you can feed them 36 volts. Not FAA-certified airplane lighting. Not a 12V drop-in. Same board, different roof.</p>
+          </details>
+          <details>
             <summary>Why four channels?<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="m6 9 6 6 6-6"/></svg></summary>
             <p>The board is four-channel — A, B, C, and D. It ships with two ports ready to run. Need more house? Add two more. Either way, you get four channels. Eaves and garage now, porch and patio later, one enclosure. Christmas and game-day at the same time. You’re welcome.</p>
           </details>
@@ -542,12 +611,13 @@
               <span class="logo-sub" style="display:block">UTAH</span>
             </span>
           </a>
-          <p class="muted" style="margin-top:1rem;max-width:20rem;font-size:.875rem">I’m Grady Gunter. Utah Tech goalie. College lacrosse got expensive, so I built this. We assemble them in the USA. Permanent lights. Occasional lacrosse.</p>
+          <p class="muted" style="margin-top:1rem;max-width:20rem;font-size:.875rem">I’m Grady Gunter. Utah Tech goalie. College lacrosse got expensive, so I built this. We assemble them in the USA. Permanent lights.</p>
         </div>
         <div class="cols">
           <div>
             <p class="lab">Product</p>
             <a href="#controller">Controller</a>
+            <a href="#anywhere">Anywhere</a>
             <a href="#compare">Why switch</a>
             <a href="#story">Story</a>
             <a href="https://n8n.gunterbots.com/webhook/lumi-app" target="_blank" rel="noreferrer">Project calculator</a>
