@@ -2,7 +2,7 @@
 
 GitHub Pages site for Spark V1, a 36V 4-channel WLED controller designed by Grady Gunter, Utah Tech Trailblazers goalie.
 
-**Live:** https://wegunterjr.github.io/xlighting_permanent_lighting.io/
+**Live:** https://utahlightcontrollers.com/
 
 Spark V1 is native 36V for Govee Pro and a few other high-power addressable strings. Two ports ready, two more you can add — four channels either way. Onboard true-off relay. Open-source WLED, pre-flashed. Assembled in the USA. First run of 22, ready to ship. **$299 + shipping.**
 
