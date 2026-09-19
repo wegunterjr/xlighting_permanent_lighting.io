@@ -177,8 +177,10 @@
     .ship { margin: 0.25rem 0 0; font-size: 0.875rem; color: var(--muted); }
     .fund { margin: 0.65rem 0 0; font-size: 0.875rem; color: var(--fg); line-height: 1.5; }
     .actions { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
-    stripe-buy-button { display: block; min-width: 12rem; }
-    .actions stripe-buy-button { flex: 1; }
+    .stripe-buy-host {
+      position: fixed; left: -9999px; top: 0; width: 320px; height: 80px;
+      overflow: hidden;
+    }
     @media (min-width: 640px) { .actions { flex-direction: row; align-items: center; } }
     @media (min-width: 1024px) {
       .product { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
@@ -431,10 +433,7 @@
           <p class="ship">+ shipping at checkout · first run of 22 · ready to ship from Utah</p>
           <p class="fund">Rent, food, tuition, lax fees, gas. I built a controller to help pay.</p>
           <div class="actions">
-            <stripe-buy-button
-              buy-button-id="buy_btn_1UHHVXKoOMzd9e8wqDyMq84B"
-              publishable-key="pk_live_51RSBt0KoOMzd9e8whzy0pDXAJ2f2A8pOL16EF3eJnwndQw9JhdVmVQL6b6fupwsy7zheJYpJWf01byMo2fysnJ6I00bv1M3EB5"
-            ></stripe-buy-button>
+            <a class="btn btn-primary" data-buy href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Grab one — $299</a>
             <a class="btn btn-outline" href="https://n8n.gunterbots.com/webhook/lumi-app" target="_blank" rel="noreferrer">Project calculator</a>
           </div>
         </div>
@@ -657,18 +656,19 @@
       <p class="eyebrow">Spark V1 · 22 ready · $299 + shipping</p>
       <h2 style="margin-top:.5rem">Grab the controller</h2>
       <p class="muted" style="margin-top:.75rem;font-size:.875rem">I built this because college got expensive. Native 36V for Govee Pro and a few other strings, four channels, true-off relay. Assembled in the USA. Looks awesome. Works. That’s the hustle.</p>
-      <div style="margin-top:1.5rem">
-        <stripe-buy-button
-          buy-button-id="buy_btn_1UHHVXKoOMzd9e8wqDyMq84B"
-          publishable-key="pk_live_51RSBt0KoOMzd9e8whzy0pDXAJ2f2A8pOL16EF3eJnwndQw9JhdVmVQL6b6fupwsy7zheJYpJWf01byMo2fysnJ6I00bv1M3EB5"
-        ></stripe-buy-button>
-      </div>
+      <a class="btn btn-primary btn-full" data-buy style="margin-top:1.5rem" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Pay $299 + shipping</a>
       <a class="btn btn-outline btn-full" id="mail-btn" style="margin-top:.75rem">Email to order</a>
       <a class="btn btn-outline btn-full" data-support style="margin-top:.75rem">Don’t need a board? Just send money</a>
       <p class="note">Opens your mail app to info@utahlightcontrollers.com</p>
     </div>
   </dialog>
 
+  <div class="stripe-buy-host" aria-hidden="true">
+    <stripe-buy-button
+      buy-button-id="buy_btn_1UHHVXKoOMzd9e8wqDyMq84B"
+      publishable-key="pk_live_51RSBt0KoOMzd9e8whzy0pDXAJ2f2A8pOL16EF3eJnwndQw9JhdVmVQL6b6fupwsy7zheJYpJWf01byMo2fysnJ6I00bv1M3EB5"
+    ></stripe-buy-button>
+  </div>
   <script async src="https://js.stripe.com/v3/buy-button.js"></script>
   <script>
     // Fallback if the Buy Button widget fails to load. Must stay $299 + shipping.
