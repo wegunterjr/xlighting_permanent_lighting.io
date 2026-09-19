@@ -16,7 +16,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://js.stripe.com" />
+
   <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -177,11 +177,7 @@
     .ship { margin: 0.25rem 0 0; font-size: 0.875rem; color: var(--muted); }
     .fund { margin: 0.65rem 0 0; font-size: 0.875rem; color: var(--fg); line-height: 1.5; }
     .actions { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
-    .stripe-buy-host {
-      position: fixed; left: -9999px; top: 0; width: 320px; height: 80px;
-      overflow: hidden;
-    }
-    @media (min-width: 640px) { .actions { flex-direction: row; align-items: center; } }
+    @media (min-width: 640px) { .actions { flex-direction: row; } }
     @media (min-width: 1024px) {
       .product { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
     }
@@ -354,7 +350,7 @@
         <a href="#faq">FAQ</a>
       </nav>
       <div style="display:flex;align-items:center;gap:.5rem">
-        <a class="btn btn-primary btn-sm nav-cta" data-buy href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Buy — $299</a>
+        <a class="btn btn-primary btn-sm nav-cta" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Buy — $299</a>
         <button class="burger" id="burger" aria-label="Open menu">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -366,7 +362,7 @@
       <a href="#compare">Why switch</a>
       <a href="#story">Story</a>
       <a href="#faq">FAQ</a>
-      <a class="btn btn-primary btn-full" style="margin-top:12px" data-buy href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Buy — $299</a>
+      <a class="btn btn-primary btn-full" style="margin-top:12px" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Buy — $299</a>
     </div>
   </header>
 
@@ -379,7 +375,7 @@
         <h1>College got expensive. <em>So I built this.</em></h1>
         <p class="lead">I’m a goalie at Utah Tech. I was excited to play college lacrosse — then rent, food, tuition, lax fees, and gas showed up. I had to build something to help pay. My crazy robotics dad and a cool neighbor who knows electronics helped me put this together: a 36-volt WLED controller for Govee Pro — and a few other high-power strings. Two ports ready. Add two more. Four channels either way. 22 ready to go. $299 + shipping.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" data-buy href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Grab one — $299</a>
+          <a class="btn btn-primary" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Grab one — $299</a>
           <a class="btn btn-outline" href="#controller">Peek at the board</a>
         </div>
         <p class="fine">Open-source WLED · 1-year warranty · 22 ready to ship from Utah</p>
@@ -433,7 +429,7 @@
           <p class="ship">+ shipping at checkout · first run of 22 · ready to ship from Utah</p>
           <p class="fund">Rent, food, tuition, lax fees, gas. I built a controller to help pay.</p>
           <div class="actions">
-            <a class="btn btn-primary" data-buy href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Grab one — $299</a>
+            <a class="btn btn-primary" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Grab one — $299</a>
             <a class="btn btn-outline" href="https://n8n.gunterbots.com/webhook/lumi-app" target="_blank" rel="noreferrer">Project calculator</a>
           </div>
         </div>
@@ -525,7 +521,7 @@
           <p class="muted" style="margin-top:1.25rem">I’m Grady Gunter — Utah Tech Trailblazers goalie. I was excited to play college lacrosse. When I got there I realized how expensive things could be — rent, food, tuition, lax fees, gas, all of it. I had to come up with something to help pay.</p>
           <p class="muted" style="margin-top:1rem">So I designed Spark V1: a native 36-volt WLED controller with four independent channels and a relay that actually cuts power. Typical boards stop at one or two channels, skip 36V, and leave the strings sipping power all summer. Mine doesn’t. And it looks awesome. My crazy robotics dad and a cool neighbor who knows electronics helped me put it together. Two ports ready, add two more — four channels either way. We assemble each unit in the USA. I used AI to hustle this site. Every board that ships helps me stay in school and in the crease. Buy a board, fund a season.</p>
           <div class="actions" style="margin-top:2rem">
-            <a class="btn btn-primary" data-buy href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Buy a unit — $299</a>
+            <a class="btn btn-primary" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Buy a unit — $299</a>
             <a class="btn btn-outline" data-support>Just send money</a>
           </div>
         </div>
@@ -595,7 +591,7 @@
         <h2 class="h2" style="margin-top:1rem">Buy a board. Fund a season.</h2>
         <p>$299 + shipping. Native 36V. Two ports ready, two more you can add, four channels either way. I designed it because college lacrosse is expensive — rent, food, tuition, lax fees, gas. Dad and the neighbor helped. 22 are ready to go. You get a cooler house. I get to keep playing.</p>
         <div class="actions" style="margin-top:2rem">
-          <a class="btn btn-primary" data-buy href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Grab the controller — $299</a>
+          <a class="btn btn-primary" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Grab the controller — $299</a>
           <a class="btn btn-outline" data-support>Just send money</a>
         </div>
       </div>
@@ -645,7 +641,7 @@
   </footer>
 
   <div class="sticky">
-    <a class="btn btn-primary btn-full" data-buy href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Buy — $299</a>
+    <a class="btn btn-primary btn-full" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Buy — $299</a>
   </div>
 
   <dialog id="reserve">
@@ -656,22 +652,14 @@
       <p class="eyebrow">Spark V1 · 22 ready · $299 + shipping</p>
       <h2 style="margin-top:.5rem">Grab the controller</h2>
       <p class="muted" style="margin-top:.75rem;font-size:.875rem">I built this because college got expensive. Native 36V for Govee Pro and a few other strings, four channels, true-off relay. Assembled in the USA. Looks awesome. Works. That’s the hustle.</p>
-      <a class="btn btn-primary btn-full" data-buy style="margin-top:1.5rem" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Pay $299 + shipping</a>
+      <a class="btn btn-primary btn-full" style="margin-top:1.5rem" href="https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06">Pay $299 + shipping</a>
       <a class="btn btn-outline btn-full" id="mail-btn" style="margin-top:.75rem">Email to order</a>
       <a class="btn btn-outline btn-full" data-support style="margin-top:.75rem">Don’t need a board? Just send money</a>
       <p class="note">Opens your mail app to info@utahlightcontrollers.com</p>
     </div>
   </dialog>
 
-  <div class="stripe-buy-host" aria-hidden="true">
-    <stripe-buy-button
-      buy-button-id="buy_btn_1UHHVXKoOMzd9e8wqDyMq84B"
-      publishable-key="pk_live_51RSBt0KoOMzd9e8whzy0pDXAJ2f2A8pOL16EF3eJnwndQw9JhdVmVQL6b6fupwsy7zheJYpJWf01byMo2fysnJ6I00bv1M3EB5"
-    ></stripe-buy-button>
-  </div>
-  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
   <script>
-    // Fallback if the Buy Button widget fails to load. Must stay $299 + shipping.
     const STRIPE = "https://buy.stripe.com/14AbJ2b2J6PV0IAeC67ss06";
     // Optional: Stripe Payment Link with no shipping, customer picks an amount.
     // Leave blank to fall back to email. Paste https://buy.stripe.com/... here when you have it.
@@ -733,21 +721,6 @@
     document.querySelectorAll("[data-support]").forEach((a) => { a.href = SUPPORT || MAIL_SUPPORT; });
     document.getElementById("close").addEventListener("click", () => dialog.close());
     dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
-
-    function clickStripeBuy() {
-      const btn = document.querySelector("stripe-buy-button");
-      if (!btn) return false;
-      const inner = btn.shadowRoot && btn.shadowRoot.querySelector("button, a, [role=button]");
-      if (inner) inner.click();
-      else btn.click();
-      return true;
-    }
-    document.querySelectorAll("[data-buy]").forEach((a) => {
-      a.addEventListener("click", (e) => {
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-        if (clickStripeBuy()) e.preventDefault();
-      });
-    });
   </script>
 </body>
 </html>
