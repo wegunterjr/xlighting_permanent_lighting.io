@@ -815,6 +815,16 @@
     // document.querySelectorAll("[data-support]").forEach((a) => { a.href = SUPPORT || MAIL_SUPPORT; });
     document.getElementById("close").addEventListener("click", () => dialog.close());
     dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
+
+    // Meta Pixel: tell Meta when someone heads to checkout. Stripe's page can't run our pixel,
+    // so we send InitiateCheckout here, then follow the link a moment later so the event gets out.
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest('a[href^="https://buy.stripe.com/"]');
+      if (!a || !window.fbq || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      fbq("track", "InitiateCheckout", { value: 299, currency: "USD", content_ids: ["SPARK-V1"], content_type: "product", num_items: 1 });
+      setTimeout(() => { location.href = a.href; }, 300);
+    });
   </script>
   <!-- Cloudflare Web Analytics -->
   <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "f68f1d4f0b1f445183028cfcfbb26881"}'></script>
