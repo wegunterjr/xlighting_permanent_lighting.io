@@ -242,7 +242,7 @@
       </div>
       <p class="eyebrow">Your estimate</p>
       <h2 style="margin-top:.4rem">Permanent lights, installed</h2>
-      <p class="hint" style="margin-top:.6rem">Two parts: the Spark V1 controller (the hardware that runs everything) and the install, priced per foot of roofline.</p>
+      <p class="hint" style="margin-top:.6rem">Two parts: the Spark V1 controller (the hardware that runs everything) and the install, priced per foot of roofline. <b style="color:var(--fg)">Everything included:</b> new Govee Pro lights, their power supply, aluminum track, mounting, wiring and WLED setup.</p>
       <div class="lines" id="pro-lines"></div>
       <div class="total"><span>Estimated total</span><span class="big" id="pro-total">$0</span></div>
       <ul class="notes" id="notes"></ul>
@@ -381,7 +381,6 @@
 
       const notes = [];
       if (q.feet) notes.push(q.feet + " ft of lights total, across " + q.runs.length + " channel" + (q.runs.length > 1 ? "s" : "") + ".");
-      notes.push("Install includes Govee Pro permanent lights, aluminum track, mounting, wiring, and WLED set up on your Wi-Fi with a few starter looks.");
       notes.push("Every run plugs into one Spark V1: four channels, WLED, and a relay that turns the lights all the way off. Comparable controllers from the big brands run $650–850.");
       if (q.highFeet) notes.push("Two-story runs add " + usd(PRICING.twoStoryPerFoot) + "/ft to the install: taller ladders, two people, and longer wiring back to the controller.");
       if (q.runs.length > PRICING.readyPorts) notes.push("Runs " + CH.slice(PRICING.readyPorts, q.runs.length).join(" and ") + " use Spark's add-on ports.");
