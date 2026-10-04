@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thank you · Utah Light Controllers</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#08090b" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #08090b; --surface: #111318; --fg: #f2efe8; --muted: #8b8a84; --spark: #e6322a; --spark-soft: #ffb3ad; --border: #2c2e35; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--fg); font-family: "Figtree", ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    .wrap { width: min(40rem, calc(100% - 2rem)); margin-inline: auto; padding: 3rem 0 4rem; }
+    .logo { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; }
+    .logo svg { width: 32px; height: 32px; }
+    .logo b { font-size: .7rem; font-weight: 600; letter-spacing: .28em; }
+    .hero { margin-top: 2.5rem; border-radius: 18px; overflow: hidden; border: 1px solid var(--border); }
+    .hero img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .eyebrow { margin: 2rem 0 0; font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--spark-soft); }
+    h1 { font-family: "Instrument Serif", ui-serif, Georgia, serif; font-weight: 400; font-size: clamp(2.4rem, 7vw, 3.4rem); line-height: 1.05; letter-spacing: -.03em; margin: .5rem 0 0; }
+    h1 em { color: var(--spark-soft); }
+    p { line-height: 1.65; color: rgba(242,239,232,.88); }
+    .card { margin-top: 1.75rem; padding: 1.25rem 1.4rem; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); }
+    .card ol { margin: .5rem 0 0; padding-left: 1.2rem; line-height: 1.7; color: rgba(242,239,232,.88); }
+    .actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.75rem; }
+    .btn { display: inline-flex; align-items: center; height: 3rem; padding: 0 1.4rem; border-radius: 12px; text-decoration: none; font-weight: 500; }
+    .btn-primary { background: var(--spark); color: #fff; }
+    .btn-outline { box-shadow: 0 0 0 1px rgba(255,255,255,.16); }
+    .fine { font-size: .85rem; color: var(--muted); margin-top: 2rem; }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1110890241430857');
+  fbq('track', 'PageView');
+  // Purchase: Stripe sends buyers here after paying, with ?session_id=cs_...
+  // Fire once per checkout so a refresh doesn't count twice.
+  (function () {
+    var sid = new URLSearchParams(location.search).get('session_id');
+    if (!sid || sid.indexOf('cs_') !== 0) return;
+    var key = 'ulc_purchase_' + sid;
+    try { if (localStorage.getItem(key)) return; localStorage.setItem(key, '1'); } catch (e) {}
+    fbq('track', 'Purchase', { value: 299, currency: 'USD', content_ids: ['SPARK-V1'], content_type: 'product', num_items: 1 }, { eventID: sid });
+  })();
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1110890241430857&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+  <main class="wrap">
+    <a class="logo" href="./" aria-label="Utah Light Controllers home">
+      <svg viewBox="0 0 36 36" aria-hidden="true">
+        <rect x="2" y="2" width="32" height="32" rx="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M11 10.5h4.2L18 16.2 20.8 10.5H25L20.1 18.2 25.4 25.5h-4.3L18 20.2 15 25.5h-4.3l5.3-7.3z" fill="currentColor"/>
+        <path d="M18.2 14.2 L20.6 18.1 L18.15 22.2 L17.1 18.1 z" fill="#08090b"/>
+      </svg>
+      <b>X LIGHTING</b>
+    </a>
+
+    <div class="hero"><img src="images/spark-live.jpg" alt="Spark V1 controller lighting a string of permanent lights" /></div>
+
+    <p class="eyebrow">Order confirmed</p>
+    <h1>Thanks for backing <em>the hustle.</em></h1>
+    <p>Your Spark V1 ships from Utah. I'll pack it myself and email you tracking as soon as it's on the way. Every one of these helps cover rent, tuition, lax fees and gas so I can keep playing at Utah Tech.</p>
+
+    <div class="card">
+      <b>What happens next</b>
+      <ol>
+        <li>Check your inbox for a thank-you email with DIY install videos.</li>
+        <li>Over the next three days: WLED setup, Home Assistant, and planning the whole house.</li>
+        <li>Tracking comes as soon as it ships.</li>
+      </ol>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="./">Back to the site</a>
+      <a class="btn btn-outline" href="mailto:info@utahlightcontrollers.com?subject=My%20Spark%20V1%20order">Questions? Email me</a>
+    </div>
+
+    <p class="fine">Grady · Utah Light Controllers · Utah Tech #lax</p>
+  </main>
+</body>
+</html>
