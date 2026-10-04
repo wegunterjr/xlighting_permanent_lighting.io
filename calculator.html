@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Permanent Lights Quote · Utah Light Controllers</title>
-  <meta name="description" content="Measure your roofline and compare two prices side by side: do it yourself with a Spark V1 WLED controller, or have Utah Light Controllers install it." />
+  <meta name="description" content="Measure your roofline and get an instant price for permanent lights installed by Utah Light Controllers, run by a Spark V1 WLED controller." />
   <meta name="theme-color" content="#08090b" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="canonical" href="https://utahlightcontrollers.com/calculator.html" />
   <meta property="og:title" content="Permanent lights quote in a minute" />
-  <meta property="og:description" content="Measure your eaves, see two prices: do it yourself, or have it installed. Run by a Spark V1 WLED controller." />
+  <meta property="og:description" content="Measure your eaves, see the installed price. Permanent lights run by a Spark V1 WLED controller." />
   <meta property="og:url" content="https://utahlightcontrollers.com/calculator.html" />
   <meta property="og:image" content="https://utahlightcontrollers.com/og.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -125,20 +125,6 @@
     .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
     .quote .eyebrow { color: var(--spark-soft); }
-    .opt { margin-top: 1.25rem; padding: 1.1rem 1.1rem 1.2rem; border-radius: 14px; background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--border); }
-    .opt.pro { box-shadow: inset 0 0 0 1px rgba(230,50,42,.45); }
-    .opt-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-    .opt-head h3 { font-size: 1.5rem; }
-    .opt-head .tag { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-    .opt.pro .opt-head .tag { color: var(--spark-soft); }
-    .opt .lines { margin-top: .9rem; gap: .7rem; }
-    .opt .total { margin-top: 1rem; padding-top: 1rem; }
-    .opt .total .big { font-size: 2.4rem; }
-    .opt .per { font-size: .8rem; color: var(--muted); margin-top: .35rem; text-align: right; }
-    .compare { margin: 1.1rem 0 0; font-size: .92rem; line-height: 1.55; color: var(--fg); }
-    .choice { display: grid; gap: .6rem; margin-top: .25rem; }
-    .choice .toggle { margin-top: 0; }
-    .choice input { accent-color: var(--spark); }
     .lines { margin: 1.25rem 0 0; display: grid; gap: .85rem; }
     .line { display: flex; justify-content: space-between; gap: 1rem; font-size: .95rem; }
     .line .what { color: var(--fg); }
@@ -171,8 +157,6 @@
       .print-only { display: block; }
       .line .what small, .notes li, .fine { color: #555; }
       .total .big { color: #111; }
-      .opt { background: #fff; box-shadow: inset 0 0 0 1px #ccc !important; break-inside: avoid; }
-      .opt .per, .opt-head .tag { color: #555 !important; }
     }
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   </style>
@@ -216,8 +200,8 @@
     <img src="images/hero-house.jpg" alt="Utah house with permanent lights along the eaves at night" />
     <div class="wrap">
       <p class="eyebrow" style="color:var(--spark-soft)">Project calculator</p>
-      <h1>Light the whole roofline. <em>See both prices.</em></h1>
-      <p>Measure the eaves you want lit, one run per side of the house. You'll see two numbers side by side: what it costs to do it yourself with a Spark V1, and what it costs to have us install it. No sales call needed.</p>
+      <h1>Light the whole roofline. <em>See the price now.</em></h1>
+      <p>Measure the eaves you want lit, one run per side of the house. You'll see what it costs to have us install permanent lights, run by a Spark V1 controller. No sales call needed to see a number.</p>
     </div>
   </section>
 
@@ -236,7 +220,7 @@
 
         <label class="toggle">
           <input type="checkbox" id="has-spark" />
-          <span><b>I already have a Spark V1</b><span>Bought the controller already? We'll take it off both prices.</span></span>
+          <span><b>I already have a Spark V1</b><span>Bought the controller already? We'll take it off the quote and wire your lights to it.</span></span>
         </label>
 
         <div class="how">
@@ -257,31 +241,21 @@
         <div id="print-for" style="margin-top:.4rem"></div>
       </div>
       <p class="eyebrow">Your estimate</p>
-      <h2 style="margin-top:.4rem">Two ways to light it</h2>
-      <div class="opt diy">
-        <div class="opt-head"><h3>Do it yourself</h3><span class="tag">Parts only</span></div>
-        <div class="lines" id="diy-lines"></div>
-        <div class="total"><span>About</span><span class="big" id="diy-total">$0</span></div>
-        <p class="per">You buy the lights and track, then install over a weekend.</p>
-      </div>
-      <div class="opt pro">
-        <div class="opt-head"><h3>We install it</h3><span class="tag">Done for you</span></div>
-        <div class="lines" id="pro-lines"></div>
-        <div class="total"><span>Estimated total</span><span class="big" id="pro-total">$0</span></div>
-        <p class="per">Lights, track, install, wiring and WLED setup. Usually a one-day job.</p>
-      </div>
-      <p class="compare" id="compare"></p>
+      <h2 style="margin-top:.4rem">Permanent lights, installed</h2>
+      <p class="hint" style="margin-top:.6rem">Two parts: the Spark V1 controller (the hardware that runs everything) and the install, priced per foot of roofline.</p>
+      <div class="lines" id="pro-lines"></div>
+      <div class="total"><span>Estimated total</span><span class="big" id="pro-total">$0</span></div>
       <ul class="notes" id="notes"></ul>
       <div class="quote-actions no-print">
         <a class="btn btn-outline btn-full" href="#quote-form" id="to-form">Email me this quote</a>
         <button class="btn btn-outline btn-full" type="button" onclick="window.print()">Print / save as PDF</button>
       </div>
-      <p class="fine">Estimates only, before sales tax. DIY parts are typical retail prices and change with sales. The installed price is confirmed after a quick look at your house (height, pitch and outlet location can change it). Quote dated <span id="q-date"></span>.</p>
+      <p class="fine">Estimates only, before sales tax. Final price is confirmed after a quick look at your house (height, pitch and outlet location can change it). Quote dated <span id="q-date"></span>.</p>
     </aside>
 
       <section class="card inputs form-card">
         <h2><span class="step">2</span>Send it to yourself, or book a walkthrough</h2>
-        <p class="hint">We'll email you both prices. If you want it installed, Grady or Walter will reach out to set up a quick look at the house and lock the final price. Going DIY? We'll send the parts list and setup tips.</p>
+        <p class="hint">We'll email you this quote. If you want to go ahead, Grady or Walter will reach out to set up a quick look at the house and lock the final price.</p>
         <form id="quote-form" novalidate>
           <div class="form-grid">
             <div><label class="field" for="q-name">Name</label><input id="q-name" name="name" type="text" autocomplete="name" required /></div>
@@ -290,12 +264,10 @@
             <div><label class="field" for="q-city">City (optional)</label><input id="q-city" name="city" type="text" autocomplete="address-level2" placeholder="St. George, Cedar City…" /></div>
             <div class="span2"><label class="field" for="q-notes">Anything we should know? (optional)</label><textarea id="q-notes" name="notes" placeholder="Two-story? Steep pitch? Want a holiday install date?"></textarea></div>
             <div class="hp" aria-hidden="true"><label>Leave this empty<input id="q-website" name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
-            <fieldset class="span2 choice" style="border:0;padding:0;margin:0">
-              <legend class="field" style="padding:0;margin-bottom:.5rem">Which way are you leaning?</legend>
-              <label class="toggle"><input type="radio" name="path" value="install" checked /><span><b>Install it for me</b><span>We'll reach out to set up a walkthrough.</span></span></label>
-              <label class="toggle"><input type="radio" name="path" value="diy" /><span><b>I'll do it myself</b><span>We'll send the parts list and setup tips.</span></span></label>
-              <label class="toggle"><input type="radio" name="path" value="unsure" /><span><b>Not sure yet</b><span>Just the numbers for now.</span></span></label>
-            </fieldset>
+            <label class="toggle span2" style="margin-top:0">
+              <input type="checkbox" id="q-install" checked />
+              <span><b>Set up a walkthrough</b><span>Uncheck if you just want the numbers for now.</span></span>
+            </label>
           </div>
           <div class="quote-actions" style="margin-top:1.25rem">
             <button class="btn btn-primary btn-full" id="send-btn" type="submit">Email me this quote</button>
@@ -317,8 +289,6 @@
     // ---- Pricing (edit these, and the same numbers in n8n "Check + price the quote") ----
     const PRICING = {
       controller: 299,       // Spark V1
-      diyLightsPerFoot: 3,   // Govee Pro lights at retail (~$600 per 200 ft kit)
-      diyTrackPerFoot: 3,    // aluminum track at retail (~$550-640 per 200 ft)
       installPerFoot: 22,    // we install it: lights + track + labor + wiring + WLED setup
       twoStoryPerFoot: 3,    // added to runs marked two-story
       installMinimum: 1000,  // smallest install job (before the controller)
@@ -384,13 +354,10 @@
       const feet = runs.reduce((s, r) => s + r.feet, 0);
       const highFeet = runs.filter((r) => r.twoStory).reduce((s, r) => s + r.feet, 0);
       const controller = hasSpark.checked ? 0 : PRICING.controller;
-      const diyLights = feet * PRICING.diyLightsPerFoot;
-      const diyTrack = feet * PRICING.diyTrackPerFoot;
-      const diyTotal = diyLights + diyTrack + controller;
       const installRuns = runs.reduce((s, r) => s + r.feet * (PRICING.installPerFoot + (r.twoStory ? PRICING.twoStoryPerFoot : 0)), 0);
       const minimumAdd = runs.length ? Math.max(0, PRICING.installMinimum - installRuns) : 0;
       const installTotal = installRuns + minimumAdd + controller;
-      return { runs, feet, highFeet, controller, diyLights, diyTrack, diyTotal, installRuns, minimumAdd, installTotal, ownsSpark: hasSpark.checked };
+      return { runs, feet, highFeet, controller, installRuns, minimumAdd, installTotal, ownsSpark: hasSpark.checked };
     }
 
     const line = (what, sub, amt, muted) => '<div class="line' + (muted ? ' muted' : '') + '"><span class="what">' + what + (sub ? '<small>' + sub + '</small>' : '') + '</span><span class="amt">' + amt + '</span></div>';
@@ -401,17 +368,6 @@
         ? line("Spark V1 controller", "You already have one", "$0", true)
         : line("Spark V1 controller", "36V · 4 channels · WLED · true-off relay", usd(PRICING.controller));
 
-      // Do it yourself
-      const diy = [spark];
-      if (q.feet) {
-        diy.push(line("Govee Pro permanent lights", q.feet + " ft × about " + usd(PRICING.diyLightsPerFoot) + "/ft · buy anywhere", usd(q.diyLights)));
-        diy.push(line("Aluminum track", q.feet + " ft × about " + usd(PRICING.diyTrackPerFoot) + "/ft", usd(q.diyTrack)));
-        diy.push(line("Install", "Your time, a ladder and a drill", "$0", true));
-      } else diy.push(line("Add the feet for at least one run", "", "–", true));
-      document.getElementById("diy-lines").innerHTML = diy.join("");
-      document.getElementById("diy-total").textContent = usd(q.runs.length ? q.diyTotal : 0);
-
-      // We install it
       const pro = [];
       q.runs.forEach((r) => {
         const rate = PRICING.installPerFoot + (r.twoStory ? PRICING.twoStoryPerFoot : 0);
@@ -419,17 +375,14 @@
       });
       if (!q.runs.length) pro.push(line("Add the feet for at least one run", "", "–", true));
       if (q.minimumAdd > 0) pro.push(line("Small-job minimum", "Install jobs start at " + usd(PRICING.installMinimum) + " before the controller", usd(q.minimumAdd)));
-      pro.push(spark);
+      pro.unshift(spark);
       document.getElementById("pro-lines").innerHTML = pro.join("");
       document.getElementById("pro-total").textContent = usd(q.runs.length ? q.installTotal : 0);
 
-      document.getElementById("compare").innerHTML = q.runs.length
-        ? "Doing it yourself saves about <b>" + usd(q.installTotal - q.diyTotal) + "</b>. Having us install it means no ladder work for you, the wiring and power planned for you, and WLED set up on your Wi-Fi."
-        : "";
-
       const notes = [];
       if (q.feet) notes.push(q.feet + " ft of lights total, across " + q.runs.length + " channel" + (q.runs.length > 1 ? "s" : "") + ".");
-      notes.push("Either way, every run plugs into one Spark V1: four channels, WLED, and a relay that turns the lights all the way off. Comparable controllers from the big brands run $650–850.");
+      notes.push("Install includes Govee Pro permanent lights, aluminum track, mounting, wiring, and WLED set up on your Wi-Fi with a few starter looks.");
+      notes.push("Every run plugs into one Spark V1: four channels, WLED, and a relay that turns the lights all the way off. Comparable controllers from the big brands run $650–850.");
       if (q.highFeet) notes.push("Two-story runs add " + usd(PRICING.twoStoryPerFoot) + "/ft to the install: taller ladders, two people, and longer wiring back to the controller.");
       if (q.runs.length > PRICING.readyPorts) notes.push("Runs " + CH.slice(PRICING.readyPorts, q.runs.length).join(" and ") + " use Spark's add-on ports.");
       const long = q.runs.filter((r) => r.feet > PRICING.setLength);
@@ -468,7 +421,7 @@
       const q = compute();
       const name = document.getElementById("q-name").value.trim();
       const email = document.getElementById("q-email").value.trim();
-      const path = (form.querySelector('input[name="path"]:checked') || {}).value || "unsure";
+      const wantsInstall = document.getElementById("q-install").checked;
       if (!q.runs.length) return show("err", "Add the feet for at least one run first.");
       if (!name) return show("err", "Add your name so we know who the quote is for.");
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return show("err", "That email doesn't look right. Mind checking it?");
@@ -478,11 +431,11 @@
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            name, email, path,
+            name, email,
             phone: document.getElementById("q-phone").value.trim(),
             city: document.getElementById("q-city").value.trim(),
             notes: document.getElementById("q-notes").value.trim(),
-            wantsInstall: path === "install",
+            wantsInstall,
             ownsSpark: q.ownsSpark,
             runs: q.runs,
             website: document.getElementById("q-website").value,
@@ -492,9 +445,8 @@
         const data = await res.json().catch(() => ({}));
         if (!res.ok || data.ok === false) throw new Error(data.error || "send failed");
         document.getElementById("print-for").textContent = "Prepared for " + name + " · Quote " + (data.quoteId || "");
-        const diyT = usd(data.diyTotal ?? q.diyTotal), proT = usd(data.installTotal ?? q.installTotal);
-        show("ok", "Sent! Check your inbox for quote <b>" + esc(data.quoteId || "") + "</b>: about <b>" + diyT + "</b> DIY, or <b>" + proT + "</b> installed." +
-          (path === "install" ? " We'll reach out within a day or two to set up a walkthrough." : ""));
+        show("ok", "Sent! Check your inbox for quote <b>" + esc(data.quoteId || "") + "</b>, estimated at <b>" + usd(data.installTotal ?? q.installTotal) + "</b>." +
+          (wantsInstall ? " We'll reach out within a day or two to set up a walkthrough." : ""));
         sendBtn.textContent = "Sent ✓";
       } catch (err) {
         show("err", "Couldn't send just now. Email <a href=\"mailto:info@utahlightcontrollers.com?subject=Lights%20quote\">info@utahlightcontrollers.com</a> with your measurements and we'll get you the quote.");
