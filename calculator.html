@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Permanent Lights Quote · Utah Light Controllers</title>
+  <meta name="description" content="Measure your roofline and get an instant price for permanent lights installed by Utah Light Controllers, run by a Spark V1 WLED controller." />
+  <meta name="theme-color" content="#08090b" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="canonical" href="https://utahlightcontrollers.com/calculator.html" />
+  <meta property="og:title" content="Permanent lights quote in a minute" />
+  <meta property="og:description" content="Measure your eaves, see the installed price. Permanent lights run by a Spark V1 WLED controller." />
+  <meta property="og:url" content="https://utahlightcontrollers.com/calculator.html" />
+  <meta property="og:image" content="https://utahlightcontrollers.com/og.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #08090b; --surface: #111318; --surface-2: #191c24;
+      --fg: #f2efe8; --muted: #8b8a84; --faint: #5e5d59;
+      --spark: #e6322a; --spark-soft: #ffb3ad; --border: #2c2e35; --ok: #5fd08a;
+      --sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+      --display: "Instrument Serif", ui-serif, Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); overflow-x: hidden; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
+    p { text-wrap: pretty; }
+    button, input, select, textarea { font: inherit; }
+    .wrap { width: min(72rem, calc(100% - 2rem)); margin-inline: auto; }
+    @media (min-width: 640px) { .wrap { width: min(72rem, calc(100% - 3rem)); } }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; height: 3rem; padding: 0 1.5rem;
+      border-radius: 12px; border: 0; font-size: 1rem; font-weight: 500; text-decoration: none; cursor: pointer;
+      transition: opacity .15s, background .15s, transform .15s; }
+    .btn:active { transform: scale(.97); }
+    .btn-primary { background: var(--spark); color: #fff; }
+    .btn-primary:hover { filter: brightness(1.06); }
+    .btn-primary[disabled] { opacity: .55; cursor: wait; }
+    .btn-outline { background: transparent; color: var(--fg); box-shadow: 0 0 0 1px rgba(255,255,255,.16); }
+    .btn-outline:hover { background: var(--surface-2); }
+    .btn-sm { height: 2.4rem; padding: 0 .9rem; font-size: .875rem; border-radius: 8px; }
+    .btn-full { width: 100%; }
+    .eyebrow { font-size: .75rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+    header.nav { position: sticky; top: 0; z-index: 30; background: rgba(8,9,11,.92); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,255,255,.07); }
+    .nav-inner { height: 4rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .logo { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; }
+    .logo-mark { width: 32px; height: 32px; }
+    .logo-name { font-size: .7rem; font-weight: 600; letter-spacing: .28em; display: block; }
+    .logo-sub { margin-top: 2px; font-size: .6rem; letter-spacing: .18em; color: var(--muted); display: block; }
+    .nav-actions { display: flex; gap: .5rem; align-items: center; }
+    .nav-back { font-size: .875rem; color: var(--muted); text-decoration: none; display: none; }
+    .nav-back:hover { color: var(--fg); }
+    @media (min-width: 640px) { .nav-back { display: inline; } }
+
+    .intro { position: relative; isolation: isolate; overflow: hidden; }
+    .intro img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; z-index: -2; }
+    .intro::after { content: ""; position: absolute; inset: 0; z-index: -1;
+      background: linear-gradient(to bottom, rgba(8,9,11,.55), rgba(8,9,11,.7) 60%, var(--bg)); }
+    .intro .wrap { padding: 4.5rem 0 3rem; }
+    .intro h1 { font-size: clamp(2.3rem, 5.5vw, 4rem); line-height: 1.05; max-width: 16ch; }
+    .intro h1 em { font-style: italic; color: var(--spark-soft); }
+    .intro p { max-width: 36rem; color: rgba(242,239,232,.88); line-height: 1.6; margin: 1rem 0 0; }
+
+    .grid { display: grid; gap: 1.5rem; padding: 1rem 0 4rem; }
+    .grid > .card + .card { margin-top: 0; }
+    @media (min-width: 960px) {
+      .grid { grid-template-columns: 1.15fr .85fr; grid-template-areas: "runs quote" "form quote"; align-items: start; }
+      .runs-card { grid-area: runs; } .form-card { grid-area: form; }
+      .quote { grid-area: quote; position: sticky; top: 5rem; }
+    }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem; }
+    @media (min-width: 640px) { .card { padding: 2rem; } }
+    .card + .card { margin-top: 1.5rem; }
+    .card h2 { font-size: 1.9rem; }
+    .step { display: inline-flex; width: 1.75rem; height: 1.75rem; border-radius: 999px; align-items: center; justify-content: center;
+      background: rgba(230,50,42,.16); color: var(--spark-soft); font-size: .8rem; font-weight: 700; margin-right: .6rem; vertical-align: middle; }
+    .hint { color: var(--muted); font-size: .9rem; line-height: 1.55; margin: .5rem 0 0; }
+
+    .runs { margin-top: 1.25rem; display: grid; gap: .75rem; }
+    .run { display: grid; grid-template-columns: 2.25rem minmax(0,1fr) 6.25rem 2.5rem; gap: .6rem; align-items: center; }
+    .run .story { grid-column: 2 / 4; display: inline-flex; align-items: center; gap: .45rem; margin-top: -.2rem; font-size: .82rem; color: var(--muted); cursor: pointer; width: max-content; }
+    .run .story input { width: 1rem; height: 1rem; accent-color: var(--spark); margin: 0; }
+    .run .story:has(input:checked) { color: var(--spark-soft); }
+    .chan { width: 2.25rem; height: 2.25rem; border-radius: 10px; display: grid; place-items: center; font-weight: 700;
+      background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--border); }
+    .chan.addon { color: var(--spark-soft); box-shadow: inset 0 0 0 1px rgba(230,50,42,.45); }
+    label.field { display: block; font-size: .8rem; color: var(--muted); margin-bottom: .35rem; }
+    input[type=text], input[type=email], input[type=tel], input[type=number], textarea, select {
+      width: 100%; min-width: 0; height: 2.85rem; padding: 0 .85rem; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--bg); color: var(--fg); outline: none; }
+    textarea { height: auto; min-height: 5.5rem; padding: .7rem .85rem; resize: vertical; }
+    input:focus, textarea:focus, select:focus { border-color: var(--spark); box-shadow: 0 0 0 3px rgba(230,50,42,.2); }
+    .ft { position: relative; }
+    .ft input { padding-right: 2.2rem; text-align: right; font-variant-numeric: tabular-nums; }
+    .ft span { position: absolute; right: .8rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: .85rem; pointer-events: none; }
+    .icon-btn { width: 2.5rem; height: 2.5rem; border-radius: 10px; border: 0; background: transparent; color: var(--muted); cursor: pointer; display: grid; place-items: center; }
+    .icon-btn:hover { background: var(--surface-2); color: var(--fg); }
+    .icon-btn[disabled] { visibility: hidden; }
+    .add-run { margin-top: .9rem; }
+
+    .presets { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+    .chip { height: 2.1rem; padding: 0 .85rem; border-radius: 999px; border: 1px solid var(--border); background: transparent; color: var(--fg); font-size: .85rem; cursor: pointer; }
+    .chip:hover { border-color: var(--spark); }
+
+    .toggle { display: flex; gap: .85rem; align-items: flex-start; margin-top: 1.25rem; padding: 1rem; border-radius: 12px; background: var(--surface-2); cursor: pointer; }
+    .toggle input { width: 1.2rem; height: 1.2rem; margin-top: .15rem; accent-color: var(--spark); flex: none; }
+    .toggle b { display: block; font-weight: 600; }
+    .toggle span { color: var(--muted); font-size: .9rem; }
+
+    .how { display: grid; gap: 1rem; margin-top: 1.25rem; }
+    @media (min-width: 640px) { .how { grid-template-columns: 1fr 1fr; } }
+    .how figure { margin: 0; }
+    .how img { border-radius: 12px; aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+    .how figcaption { font-size: .85rem; color: var(--muted); margin-top: .5rem; line-height: 1.5; }
+
+    .form-grid { display: grid; gap: .9rem; margin-top: 1.25rem; }
+    @media (min-width: 640px) { .form-grid { grid-template-columns: 1fr 1fr; } .form-grid .span2 { grid-column: span 2; } }
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+    .quote .eyebrow { color: var(--spark-soft); }
+    .lines { margin: 1.25rem 0 0; display: grid; gap: .85rem; }
+    .line { display: flex; justify-content: space-between; gap: 1rem; font-size: .95rem; }
+    .line .what { color: var(--fg); }
+    .line .what small { display: block; color: var(--muted); font-size: .8rem; margin-top: .15rem; }
+    .line .amt { font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .line.muted .amt { color: var(--muted); }
+    .total { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: baseline; }
+    .total .big { font-family: var(--display); font-size: 3rem; line-height: 1; font-variant-numeric: tabular-nums; }
+    .notes { margin: 1.25rem 0 0; padding: 0; list-style: none; display: grid; gap: .55rem; }
+    .notes li { font-size: .85rem; color: var(--muted); line-height: 1.5; padding-left: 1.2rem; position: relative; }
+    .notes li::before { content: ""; position: absolute; left: 0; top: .55rem; width: .45rem; height: .45rem; border-radius: 999px; background: var(--spark); }
+    .notes li.warn { color: var(--spark-soft); }
+    .quote-actions { display: grid; gap: .6rem; margin-top: 1.5rem; }
+    .fine { font-size: .78rem; color: var(--faint); margin-top: 1rem; line-height: 1.5; }
+
+    .msg { margin-top: 1rem; padding: .9rem 1rem; border-radius: 12px; font-size: .92rem; line-height: 1.5; display: none; }
+    .msg.ok { display: block; background: rgba(95,208,138,.12); color: #bff0d0; box-shadow: inset 0 0 0 1px rgba(95,208,138,.35); }
+    .msg.err { display: block; background: rgba(230,50,42,.12); color: var(--spark-soft); box-shadow: inset 0 0 0 1px rgba(230,50,42,.35); }
+
+    footer { border-top: 1px solid rgba(255,255,255,.07); padding: 2rem 0 3rem; color: var(--muted); font-size: .85rem; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
+    footer a { color: var(--muted); }
+
+    .print-only { display: none; }
+    @media print {
+      body { background: #fff; color: #111; }
+      header.nav, .intro, .inputs, .quote-actions, footer, .no-print { display: none !important; }
+      .grid { display: block; padding: 0; }
+      .card { border: 0; padding: 0; background: #fff; }
+      .print-only { display: block; }
+      .line .what small, .notes li, .fine { color: #555; }
+      .total .big { color: #111; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1110890241430857');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1110890241430857&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="logo" href="./" aria-label="Utah Light Controllers home">
+        <svg class="logo-mark" viewBox="0 0 36 36" aria-hidden="true">
+          <rect x="2" y="2" width="32" height="32" rx="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M11 10.5h4.2L18 16.2 20.8 10.5H25L20.1 18.2 25.4 25.5h-4.3L18 20.2 15 25.5h-4.3l5.3-7.3z" fill="currentColor"/>
+          <path d="M18.2 14.2 L20.6 18.1 L18.15 22.2 L17.1 18.1 z" fill="#08090b"/>
+        </svg>
+        <span><span class="logo-name">X LIGHTING</span><span class="logo-sub">UTAH</span></span>
+      </a>
+      <div class="nav-actions">
+        <a class="nav-back" href="./">← Back to Spark V1</a>
+        <a class="btn btn-outline btn-sm" href="./#controller">Just the controller</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="intro">
+    <img src="images/hero-house.jpg" alt="Utah house with permanent lights along the eaves at night" />
+    <div class="wrap">
+      <p class="eyebrow" style="color:var(--spark-soft)">Project calculator</p>
+      <h1>Light the whole roofline. <em>See the price now.</em></h1>
+      <p>Measure the eaves you want lit, one run per side of the house. You'll see what it costs to have us install permanent lights, run by a Spark V1 controller. No sales call needed to see a number.</p>
+    </div>
+  </section>
+
+  <main class="wrap grid">
+      <section class="card inputs runs-card">
+        <h2><span class="step">1</span>Measure your runs</h2>
+        <p class="hint">A run is one stretch of roofline that goes back to the controller, like the front eave or the garage. Spark has four channels, so up to four runs. Round up to the nearest foot; a tape measure on the ground under the eave is close enough. Tick <b>Two-story</b> for any run up at second-floor height.</p>
+        <div class="presets" aria-label="Quick starts">
+          <button type="button" class="chip" data-preset="80">Townhome · front only</button>
+          <button type="button" class="chip" data-preset="60,40">Front + garage</button>
+          <button type="button" class="chip" data-preset="70,45,90">Front, garage, back</button>
+          <button type="button" class="chip" data-preset="70,45,90,60">Whole house</button>
+        </div>
+        <div class="runs" id="runs"></div>
+        <button type="button" class="btn btn-outline btn-sm add-run" id="add-run">+ Add a run</button>
+
+        <label class="toggle">
+          <input type="checkbox" id="has-spark" />
+          <span><b>I already have a Spark V1</b><span>Bought the controller already? We'll take it off the quote and wire your lights to it.</span></span>
+        </label>
+
+        <div class="how">
+          <figure>
+            <img src="images/install-soffit.jpg" alt="Seating a permanent light wire into the soffit" loading="lazy" />
+            <figcaption>Lights sit in a low-profile track under the soffit. You barely see them by day.</figcaption>
+          </figure>
+          <figure>
+            <img src="images/spark-closed.jpg" alt="Spark V1 controller in its weatherproof enclosure" loading="lazy" />
+            <figcaption>Every run lands on one Spark V1: four channels, WLED, a relay that turns them all the way off.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <aside class="card quote" aria-live="polite">
+      <div class="print-only" style="margin-bottom:1.5rem">
+        <strong>Utah Light Controllers</strong> · utahlightcontrollers.com · info@utahlightcontrollers.com
+        <div id="print-for" style="margin-top:.4rem"></div>
+      </div>
+      <p class="eyebrow">Your estimate</p>
+      <h2 style="margin-top:.4rem">Permanent lights, installed</h2>
+      <p class="hint" style="margin-top:.6rem">Two parts: the Spark V1 controller (the hardware that runs everything) and the install, priced per foot of roofline. <b style="color:var(--fg)">Everything included:</b> new Govee Pro lights, their power supply, aluminum track, mounting, wiring and WLED setup.</p>
+      <div class="lines" id="pro-lines"></div>
+      <div class="total"><span>Estimated total</span><span class="big" id="pro-total">$0</span></div>
+      <ul class="notes" id="notes"></ul>
+      <div class="quote-actions no-print">
+        <a class="btn btn-outline btn-full" href="#quote-form" id="to-form">Email me this quote</a>
+        <button class="btn btn-outline btn-full" type="button" onclick="window.print()">Print / save as PDF</button>
+      </div>
+      <p class="fine">Estimates only, before sales tax. Final price is confirmed after a quick look at your house (height, pitch and outlet location can change it). Quote dated <span id="q-date"></span>.</p>
+    </aside>
+
+      <section class="card inputs form-card">
+        <h2><span class="step">2</span>Send it to yourself, or book a walkthrough</h2>
+        <p class="hint">We'll email you this quote. If you want to go ahead, Grady or Walter will reach out to set up a quick look at the house and lock the final price.</p>
+        <form id="quote-form" novalidate>
+          <div class="form-grid">
+            <div><label class="field" for="q-name">Name</label><input id="q-name" name="name" type="text" autocomplete="name" required /></div>
+            <div><label class="field" for="q-email">Email</label><input id="q-email" name="email" type="email" autocomplete="email" required /></div>
+            <div><label class="field" for="q-phone">Phone (optional)</label><input id="q-phone" name="phone" type="tel" autocomplete="tel" /></div>
+            <div><label class="field" for="q-city">City (optional)</label><input id="q-city" name="city" type="text" autocomplete="address-level2" placeholder="St. George, Cedar City…" /></div>
+            <div class="span2"><label class="field" for="q-notes">Anything we should know? (optional)</label><textarea id="q-notes" name="notes" placeholder="Two-story? Steep pitch? Want a holiday install date?"></textarea></div>
+            <div class="hp" aria-hidden="true"><label>Leave this empty<input id="q-website" name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
+            <label class="toggle span2" style="margin-top:0">
+              <input type="checkbox" id="q-install" checked />
+              <span><b>Set up a walkthrough</b><span>Uncheck if you just want the numbers for now.</span></span>
+            </label>
+          </div>
+          <div class="quote-actions" style="margin-top:1.25rem">
+            <button class="btn btn-primary btn-full" id="send-btn" type="submit">Email me this quote</button>
+          </div>
+          <div class="msg" id="form-msg" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Utah Light Controllers · Designed in Utah, assembled in the USA.</span>
+      <span><a href="mailto:info@utahlightcontrollers.com">info@utahlightcontrollers.com</a> · <a href="./#faq">FAQ</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // ---- Pricing (edit these, and the same numbers in n8n "Check + price the quote") ----
+    const PRICING = {
+      controller: 299,       // Spark V1
+      installPerFoot: 22,    // we install it: lights + track + labor + wiring + WLED setup
+      twoStoryPerFoot: 3,    // added to runs marked two-story
+      installMinimum: 1000,  // smallest install job (before the controller)
+      setLength: 200,        // feet per light set
+      maxRuns: 4,            // Spark V1 channels
+      readyPorts: 2          // ports ready out of the box
+    };
+    const QUOTE_URL = "https://n8n.gunterbots.com/webhook/ulc-quote";
+    const CH = ["A", "B", "C", "D"];
+    const DEFAULT_NAMES = ["Front eave", "Garage", "Back", "Side"];
+
+    const runsEl = document.getElementById("runs");
+    const addBtn = document.getElementById("add-run");
+    const hasSpark = document.getElementById("has-spark");
+    const usd = (n) => "$" + Math.round(n).toLocaleString("en-US");
+
+    function runRow(name, feet, twoStory) {
+      const i = runsEl.children.length;
+      const row = document.createElement("div");
+      row.className = "run";
+      row.innerHTML =
+        '<div class="chan' + (i >= PRICING.readyPorts ? ' addon' : '') + '" title="Channel ' + CH[i] + '">' + CH[i] + '</div>' +
+        '<input type="text" aria-label="Run name" class="run-name" maxlength="40">' +
+        '<div class="ft"><input type="number" inputmode="numeric" min="0" max="2000" step="1" aria-label="Feet" class="run-feet"><span>ft</span></div>' +
+        '<button type="button" class="icon-btn" aria-label="Remove run">' +
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M18 6 6 18M6 6l12 12"/></svg></button>' +
+        '<label class="story"><input type="checkbox" class="run-two"> Two-story (second-floor height)</label>';
+      row.querySelector(".run-name").value = name;
+      row.querySelector(".run-feet").value = feet === "" ? "" : feet;
+      row.querySelector(".run-two").checked = !!twoStory;
+      row.querySelector(".icon-btn").addEventListener("click", () => { row.remove(); relabel(); update(); });
+      row.querySelectorAll("input").forEach((el) => el.addEventListener("input", update));
+      runsEl.appendChild(row);
+    }
+
+    function relabel() {
+      [...runsEl.children].forEach((row, i) => {
+        const c = row.querySelector(".chan");
+        c.textContent = CH[i];
+        c.className = "chan" + (i >= PRICING.readyPorts ? " addon" : "");
+        row.querySelector(".icon-btn").disabled = runsEl.children.length === 1;
+      });
+      addBtn.style.display = runsEl.children.length >= PRICING.maxRuns ? "none" : "";
+    }
+
+    function setRuns(list) {
+      runsEl.innerHTML = "";
+      list.forEach((ft, i) => runRow(DEFAULT_NAMES[i], ft, false));
+      relabel(); update();
+    }
+
+    function readRuns() {
+      return [...runsEl.children].map((row, i) => ({
+        channel: CH[i],
+        name: (row.querySelector(".run-name").value || DEFAULT_NAMES[i]).trim(),
+        feet: Math.max(0, Math.round(Number(row.querySelector(".run-feet").value) || 0)),
+        twoStory: row.querySelector(".run-two").checked
+      }));
+    }
+
+    function compute() {
+      const runs = readRuns().filter((r) => r.feet > 0);
+      const feet = runs.reduce((s, r) => s + r.feet, 0);
+      const highFeet = runs.filter((r) => r.twoStory).reduce((s, r) => s + r.feet, 0);
+      const controller = hasSpark.checked ? 0 : PRICING.controller;
+      const installRuns = runs.reduce((s, r) => s + r.feet * (PRICING.installPerFoot + (r.twoStory ? PRICING.twoStoryPerFoot : 0)), 0);
+      const minimumAdd = runs.length ? Math.max(0, PRICING.installMinimum - installRuns) : 0;
+      const installTotal = installRuns + minimumAdd + controller;
+      return { runs, feet, highFeet, controller, installRuns, minimumAdd, installTotal, ownsSpark: hasSpark.checked };
+    }
+
+    const line = (what, sub, amt, muted) => '<div class="line' + (muted ? ' muted' : '') + '"><span class="what">' + what + (sub ? '<small>' + sub + '</small>' : '') + '</span><span class="amt">' + amt + '</span></div>';
+
+    function update() {
+      const q = compute();
+      const spark = q.ownsSpark
+        ? line("Spark V1 controller", "You already have one", "$0", true)
+        : line("Spark V1 controller", "36V · 4 channels · WLED · true-off relay", usd(PRICING.controller));
+
+      const pro = [];
+      q.runs.forEach((r) => {
+        const rate = PRICING.installPerFoot + (r.twoStory ? PRICING.twoStoryPerFoot : 0);
+        pro.push(line(esc(r.name), "Channel " + r.channel + " · " + r.feet + " ft × " + usd(rate) + "/ft" + (r.twoStory ? " (two-story)" : "") + " installed", usd(r.feet * rate)));
+      });
+      if (!q.runs.length) pro.push(line("Add the feet for at least one run", "", "–", true));
+      if (q.minimumAdd > 0) pro.push(line("Small-job minimum", "Install jobs start at " + usd(PRICING.installMinimum) + " before the controller", usd(q.minimumAdd)));
+      pro.unshift(spark);
+      document.getElementById("pro-lines").innerHTML = pro.join("");
+      document.getElementById("pro-total").textContent = usd(q.runs.length ? q.installTotal : 0);
+
+      const notes = [];
+      if (q.feet) notes.push(q.feet + " ft of lights total, across " + q.runs.length + " channel" + (q.runs.length > 1 ? "s" : "") + ".");
+      notes.push("Every run plugs into one Spark V1: four channels, WLED, and a relay that turns the lights all the way off. Comparable controllers from the big brands run $650–850.");
+      if (q.highFeet) notes.push("Two-story runs add " + usd(PRICING.twoStoryPerFoot) + "/ft to the install: taller ladders, two people, and longer wiring back to the controller.");
+      if (q.runs.length > PRICING.readyPorts) notes.push("Runs " + CH.slice(PRICING.readyPorts, q.runs.length).join(" and ") + " use Spark's add-on ports.");
+      const long = q.runs.filter((r) => r.feet > PRICING.setLength);
+      if (long.length) notes.push('<span class="warn-text">' + long.map((r) => esc(r.name)).join(", ") + " is over " + PRICING.setLength + " ft, so it needs more than one light set and power fed in at more than one point.</span>");
+      document.getElementById("notes").innerHTML = notes.map((n) => '<li' + (n.includes("warn-text") ? ' class="warn"' : '') + '>' + n + '</li>').join("");
+      try { localStorage.setItem("ulc_quote_draft", JSON.stringify({ runs: readRuns(), owns: hasSpark.checked })); } catch (e) {}
+    }
+
+    function esc(s) { return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+
+    addBtn.addEventListener("click", () => { runRow(DEFAULT_NAMES[runsEl.children.length], "", false); relabel(); update(); runsEl.lastChild.querySelector(".run-feet").focus(); });
+    hasSpark.addEventListener("change", update);
+    document.querySelectorAll("[data-preset]").forEach((b) => b.addEventListener("click", () => setRuns(b.dataset.preset.split(",").map(Number))));
+    document.getElementById("q-date").textContent = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+
+    // Start: ?owned=1 (from the customer emails) or the last draft, else front + garage
+    (function start() {
+      const params = new URLSearchParams(location.search);
+      let draft = null;
+      try { draft = JSON.parse(localStorage.getItem("ulc_quote_draft") || "null"); } catch (e) {}
+      if (params.get("owned") === "1") hasSpark.checked = true;
+      else if (draft && typeof draft.owns === "boolean") hasSpark.checked = draft.owns;
+      if (draft && Array.isArray(draft.runs) && draft.runs.length) {
+        draft.runs.slice(0, PRICING.maxRuns).forEach((r, i) => runRow(r.name || DEFAULT_NAMES[i], r.feet || "", r.twoStory));
+        relabel(); update();
+      } else setRuns([60, 40]);
+    })();
+
+    // Send
+    const form = document.getElementById("quote-form");
+    const msg = document.getElementById("form-msg");
+    const sendBtn = document.getElementById("send-btn");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.className = "msg";
+      const q = compute();
+      const name = document.getElementById("q-name").value.trim();
+      const email = document.getElementById("q-email").value.trim();
+      const wantsInstall = document.getElementById("q-install").checked;
+      if (!q.runs.length) return show("err", "Add the feet for at least one run first.");
+      if (!name) return show("err", "Add your name so we know who the quote is for.");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return show("err", "That email doesn't look right. Mind checking it?");
+      sendBtn.disabled = true; sendBtn.textContent = "Sending…";
+      try {
+        const res = await fetch(QUOTE_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name, email,
+            phone: document.getElementById("q-phone").value.trim(),
+            city: document.getElementById("q-city").value.trim(),
+            notes: document.getElementById("q-notes").value.trim(),
+            wantsInstall,
+            ownsSpark: q.ownsSpark,
+            runs: q.runs,
+            website: document.getElementById("q-website").value,
+            page: location.href
+          })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || data.ok === false) throw new Error(data.error || "send failed");
+        document.getElementById("print-for").textContent = "Prepared for " + name + " · Quote " + (data.quoteId || "");
+        show("ok", "Sent! Check your inbox for quote <b>" + esc(data.quoteId || "") + "</b>, estimated at <b>" + usd(data.installTotal ?? q.installTotal) + "</b>." +
+          (wantsInstall ? " We'll reach out within a day or two to set up a walkthrough." : ""));
+        sendBtn.textContent = "Sent ✓";
+      } catch (err) {
+        show("err", "Couldn't send just now. Email <a href=\"mailto:info@utahlightcontrollers.com?subject=Lights%20quote\">info@utahlightcontrollers.com</a> with your measurements and we'll get you the quote.");
+        sendBtn.disabled = false; sendBtn.textContent = "Email me this quote";
+      }
+    });
+    function show(kind, html) { msg.className = "msg " + kind; msg.innerHTML = html; }
+  </script>
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "f68f1d4f0b1f445183028cfcfbb26881"}'></script>
+</body>
+</html>
